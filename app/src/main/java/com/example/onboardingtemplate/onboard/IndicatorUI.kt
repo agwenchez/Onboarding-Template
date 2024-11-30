@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -25,15 +26,15 @@ fun IndicatorUi(
 ){
     Row(horizontalArrangement = Arrangement.SpaceBetween) {
         repeat(pageSize){
-            Spacer(modifier = Modifier.height(2.5.dp))
+            Spacer(modifier = Modifier.size(2.5.dp))
             Box(
                 modifier = Modifier
                     .height(14.dp)
-                    .width( width = if(it ==currentPage) 32.dp else 16.dp)
+                    .width( width = if(it == currentPage) 32.dp else 14.dp)
                     .clip(RoundedCornerShape(10.dp))
                     .background(if( it == currentPage) selectedColor else unselectedColor)
             )
-            Spacer(modifier = Modifier.height(2.5.dp))
+            Spacer(modifier = Modifier.size(2.5.dp))
         }
     }
 }

@@ -19,34 +19,34 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun OnboardingUI(onboardingModel: OnboardingModel){
+fun OnboardingUi(onboardingModel: OnboardingModel){
     Column(modifier = Modifier.fillMaxSize()) {
         Spacer(
-            modifier = Modifier.size(50.dp)
+            modifier = Modifier.size(90.dp)
         )
         Image(
             painter = painterResource(id = onboardingModel.image),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(50.dp, 0.dp),
+                .padding(20.dp, 0.dp),
             alignment = Alignment.Center
         )
         Spacer(
-            modifier = Modifier.size(50.dp)
+            modifier = Modifier.size(70.dp)
         )
         Text(
             text = onboardingModel.title,
             modifier = Modifier
-                .fillMaxWidth(),
-//                .padding(15.dp, 0.dp),
+                .fillMaxWidth()
+                .padding(15.dp, 0.dp),
             fontSize = 22.sp,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(
-            modifier = Modifier.size(10.dp)
+            modifier = Modifier.size(20.dp)
         )
         Text(
             text = onboardingModel.description,
@@ -65,5 +65,5 @@ fun OnboardingUI(onboardingModel: OnboardingModel){
 @Preview(showBackground = true)
 @Composable
 fun OnboardingUIPreview1(){
-    OnboardingUI(OnboardingModel.FirstPage)
+    OnboardingUi(OnboardingModel.FirstPage)
 }
