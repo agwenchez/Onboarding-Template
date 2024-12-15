@@ -1,6 +1,7 @@
 package com.example.onboardingtemplate.onboard
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,18 +23,18 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun OnboardingUi(onboardingModel: OnboardingModel){
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize(),   verticalArrangement = Arrangement.Center, // Centers content vertically
+        horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(
             modifier = Modifier.size(90.dp)
         )
-        Image(
-            painter = painterResource(id = onboardingModel.image),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp, 0.dp),
-            alignment = Alignment.Center
-        )
+            Image(
+                painter = painterResource(id = onboardingModel.image),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(20.dp, 0.dp),
+                alignment = Alignment.Center
+            )
         Spacer(
             modifier = Modifier.size(70.dp)
         )
@@ -40,10 +43,10 @@ fun OnboardingUi(onboardingModel: OnboardingModel){
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(15.dp, 0.dp),
-            fontSize = 22.sp,
+            fontSize = 40.sp,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onBackground
+            color = Color.Black
         )
         Spacer(
             modifier = Modifier.size(20.dp)
@@ -53,10 +56,11 @@ fun OnboardingUi(onboardingModel: OnboardingModel){
             modifier = Modifier
                     .fillMaxWidth()
                     .padding(15.dp, 0.dp),
-            fontSize = 16.sp,
+            fontSize = 22.sp,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface
+            color = Color.Black,
+            fontWeight = FontWeight.Normal
         )
     }
 }

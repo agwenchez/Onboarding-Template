@@ -1,5 +1,6 @@
 package com.example.onboardingtemplate.onboard
 
+import IndicatorUi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -53,7 +54,7 @@ fun OnboardingScreen(onFinished:() -> Unit){
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White)
-                    .padding(10.dp, 60.dp),
+                    .padding(10.dp, 70.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -66,8 +67,8 @@ fun OnboardingScreen(onFinished:() -> Unit){
                         ButtonUi(
                             text = buttonState.value[0],
                             backgroundColor = Color.Transparent,
-                            textColor = Color.Gray,
-
+                            textColor = Color(android.graphics.Color.parseColor("#4CAF50")),
+                            borderColor = Color(android.graphics.Color.parseColor("#4CAF50"))
                         ) {
                             scope.launch{
                                 if(pagerState.currentPage > 0){
@@ -96,9 +97,9 @@ fun OnboardingScreen(onFinished:() -> Unit){
                 ){
                     ButtonUi(
                         text = buttonState.value[1],
-                        backgroundColor = MaterialTheme.colorScheme.primary,
-                        textColor = MaterialTheme.colorScheme.onPrimary,
-
+                        backgroundColor = Color(android.graphics.Color.parseColor("#4CAF50")),
+                        textColor = Color.White,
+                        borderColor = Color(android.graphics.Color.parseColor("#4CAF50"))
                     ){
                         scope.launch{
                             if(pagerState.currentPage < pages.size -1){

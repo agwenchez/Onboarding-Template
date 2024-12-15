@@ -4,20 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.onboardingtemplate.auth.SignInScreen
+import com.example.onboardingtemplate.dashboard.Dashboard
 import com.example.onboardingtemplate.onboard.OnboardingScreen
 import com.example.onboardingtemplate.onboard.OnboardingUtils
 import com.example.onboardingtemplate.ui.theme.OnboardingTemplateTheme
@@ -34,7 +28,12 @@ class MainActivity : ComponentActivity() {
             OnboardingTemplateTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     if (onboardingUtils.isOnboardingCompleted()) {
-                        ShowHomeScreen()
+                        SignInScreen {
+                            onboardingUtils.setOnboardingStarted()
+                            setContent {
+                                Dashboard()
+                            }
+                        }
                     } else {
                         ShowOnboardingScreen()
                     }
@@ -43,26 +42,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    private fun ShowHomeScreen() {
-        Surface(modifier = Modifier.safeDrawingPadding().fillMaxSize(),) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "Home Screen", style = MaterialTheme.typography.headlineLarge)
-                Button(
-                    onClick = {
-                        onboardingUtils.setOnboardingStarted()
-                        setContent{ ShowOnboardingScreen()}
-                    }
-                ) {
-                    Text(text = "Back to Onboarding")
-                }
-            }
-        }
-    }
 
     @Composable
     private fun ShowOnboardingScreen() {
@@ -71,17 +50,29 @@ class MainActivity : ComponentActivity() {
             onboardingUtils.setOnboardingCompleted()
             scope.launch {
                 setContent {
-                    ShowHomeScreen()
+                    SignInScreen({
+                        onboardingUtils.setOnboardingStarted()
+                        setContent{
+                            Dashboard()
+                        }
+                    })
                 }
             }
         }
     }
 
+
+
     @Preview(showBackground = true)
     @Composable
     fun OnboardingTemplatePreview() {
         OnboardingTemplateTheme {
-            ShowHomeScreen()
+            SignInScreen({
+                onboardingUtils.setOnboardingStarted()
+                setContent{
+                    ShowOnboardingScreen()
+                }
+            })
         }
     }
 }

@@ -10,21 +10,22 @@ sealed class OnboardingModel(
 ) {
 
     data object FirstPage : OnboardingModel(
-        image = R.drawable.img_into_1,
-        title = "Your Reading Partner",
-        description = "Read as many book as you want, anywhere you want"
+        image = R.drawable.barbecue,
+        title = "All your Favourites",
+        description = "Get all your sumptuous meals in one place. Just order and we will take care of the rest. We gachyu!"
     )
 
     data object SecondPage : OnboardingModel(
-        image = R.drawable.img_into_2,
-        title = "Your Personal Library",
-        description = "Organize books in different ways, make your own library"
+        image = R.drawable.chef,
+        title = "Order from chosen Chef",
+        description = "From a myriad of experienced chefs, choose from a point of abundance and enjoy your tailored meal"
     )
 
     data object ThirdPage : OnboardingModel(
-        image = R.drawable.img_into_3,
-        title = "Search and Filter",
-        description = "Get any book you want within a simple search across your device"
+        image = R.drawable.cart,
+        title = "Daily Offers",
+        description = "Every day features a new deal of the day from our pool of experienced chefs. Be sure to be on the look out"
     )
+
 
 }
