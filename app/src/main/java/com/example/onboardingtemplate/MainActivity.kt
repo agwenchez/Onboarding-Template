@@ -10,10 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.onboardingtemplate.auth.SignInScreen
 import com.example.onboardingtemplate.dashboard.Dashboard
 import com.example.onboardingtemplate.onboard.OnboardingScreen
 import com.example.onboardingtemplate.onboard.OnboardingUtils
+import com.example.onboardingtemplate.ui.screens.ProductsViewModel
 import com.example.onboardingtemplate.ui.theme.OnboardingTemplateTheme
 import kotlinx.coroutines.launch
 
@@ -22,16 +24,20 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
+//        installSplashScreen()
         enableEdgeToEdge()
         setContent {
             OnboardingTemplateTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
+                  val productsViewModel: ProductsViewModel = viewModel(factory = ProductsViewModel.Factory)
                     if (onboardingUtils.isOnboardingCompleted()) {
                         SignInScreen {
                             onboardingUtils.setOnboardingStarted()
                             setContent {
-                                Dashboard()
+                                Dashboard(
+                                    productsUiState =  productsViewModel.productsUiState,
+                                    retryAction = productsViewModel::getProducts
+                                )
                             }
                         }
                     } else {
@@ -42,6 +48,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
 
     @Composable
     private fun ShowOnboardingScreen() {
@@ -50,12 +59,16 @@ class MainActivity : ComponentActivity() {
             onboardingUtils.setOnboardingCompleted()
             scope.launch {
                 setContent {
-                    SignInScreen({
+                    val productsViewModel: ProductsViewModel = viewModel(factory = ProductsViewModel.Factory)
+                    SignInScreen {
                         onboardingUtils.setOnboardingStarted()
-                        setContent{
-                            Dashboard()
+                        setContent {
+                            Dashboard(
+                                productsUiState =  productsViewModel.productsUiState,
+                                retryAction = productsViewModel::getProducts
+                            )
                         }
-                    })
+                    }
                 }
             }
         }
@@ -67,12 +80,12 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun OnboardingTemplatePreview() {
         OnboardingTemplateTheme {
-            SignInScreen({
+            SignInScreen {
                 onboardingUtils.setOnboardingStarted()
-                setContent{
+                setContent {
                     ShowOnboardingScreen()
                 }
-            })
+            }
         }
     }
 }

@@ -2,5 +2,8 @@
     <string name="app_name">Kwangu 2 Kwako</string>
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
-    <string name="search_label">What do you want to eat?</string>
+    <string name="product_name_label">Product Name</string>
+    <string name="product_description_label">Product Description</string>
+    <string name="product_category_label">Product Category</string>
+    <string name="search_label">Search...</string>
 </resources>

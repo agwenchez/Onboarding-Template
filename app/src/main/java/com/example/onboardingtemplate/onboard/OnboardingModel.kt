@@ -26,6 +26,4 @@ sealed class OnboardingModel(
         title = "Daily Offers",
         description = "Every day features a new deal of the day from our pool of experienced chefs. Be sure to be on the look out"
     )
-
-
 }

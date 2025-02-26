@@ -3,7 +3,10 @@ package com.example.onboardingtemplate.auth
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +44,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.onboardingtemplate.R
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -62,16 +67,11 @@ fun SignInScreen(onLoginClick: () -> Unit){
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = "Kwangu2Kwako",
-                    fontSize = 30.sp,
-                    modifier = Modifier.padding(bottom = 10.dp),
-                    color = Color.White
-                )
+                Image(painter = painterResource(R.drawable.splash_logo_transparent), contentDescription = "logo", modifier = Modifier.size(120.dp))
                 Text(
                     text = "Welcome Back",
                     fontSize = 24.sp,
-                    modifier = Modifier.padding(bottom = 40.dp),
+                    modifier = Modifier.padding(bottom = 60.dp),
                     color = Color.White
                 )
                 Spacer(modifier = Modifier.size(40.dp))
@@ -158,6 +158,26 @@ fun SignInScreen(onLoginClick: () -> Unit){
                         color = Color(android.graphics.Color.parseColor("#FFFFFF"))
                     )
                 }
+                Spacer(modifier = Modifier.size(50.dp).fillMaxWidth())
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth().padding(8.dp)
+                ){
+                    Text(
+                        text=" Don't have an account?",
+                        color = Color.Black
+                    )
+                        Text(
+                            text=" Register",
+                            color = Color(android.graphics.Color.parseColor("#009944")),
+                                modifier = Modifier.clickable{
+                                    // Handle click action
+                                    println("Text clicked!")
+                                }
+                        )
+
+                }
+
                 Spacer(modifier = Modifier.size(240.dp))
             }
         }
@@ -231,6 +251,8 @@ fun EditNumberField(
 //            shape = RoundedCornerShape(32.dp)
     )
 }
+
+
 
 @Preview
 @Composable
